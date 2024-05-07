@@ -2,7 +2,7 @@
 
 import { asImageSrc, Content, isFilled } from "@prismicio/client";
 import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
+import React, { RefObject, useEffect, useRef, useState } from "react";
 import { MdArrowOutward } from "react-icons/md";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -24,7 +24,9 @@ export default function ContentList({
 }: ContentListProps) {
   const component = useRef(null);
   const revealRef = useRef(null);
-  const itemsRef = useRef<Array<HTMLLIElement | null>>([]);
+  const itemsRef = useRef<Array<RefObject<HTMLLIElement> | null>>(
+    items.map(() => React.createRef<HTMLLIElement>()),
+  );
   const [currentItem, setCurrentItem] = useState<null | number>(null);
 
   const urlPrefixes = contentType === "Blog" ? "/blog" : "/projects";
@@ -36,9 +38,9 @@ export default function ContentList({
 
   useEffect(() => {
     let ctx = gsap.context(() => {
-      itemsRef.current.forEach((item) => {
+      itemsRef.current.forEach((itemRef) => {
         gsap.fromTo(
-          item,
+          itemRef,
           { opacity: 0, y: 20 },
           {
             opacity: 1,
@@ -46,12 +48,12 @@ export default function ContentList({
             duration: 1.3,
             ease: "elastic.out(1, 0.3)",
             scrollTrigger: {
-              trigger: item,
+              trigger: itemRef?.current,
               start: "top bottom-=100px",
               end: "bottom center",
               toggleActions: "play none none none",
             },
-          }
+          },
         );
       });
       return () => ctx.revert();
@@ -136,7 +138,7 @@ export default function ContentList({
                 key={index}
                 className="list-item opacity-0"
                 onMouseEnter={() => onMouseEnter(index)}
-                ref={(el) => (itemsRef.current[index] = el)}
+                ref={itemsRef.current[index]}
               >
                 <Link
                   href={urlPrefixes + "/" + item.uid}
@@ -147,7 +149,7 @@ export default function ContentList({
                     <span className="text-3xl font-bold">
                       {item.data.title}
                     </span>
-                    <div className="flex gap-3 text-yellow-400 text-lg font-bold">
+                    <div className="flex gap-3 text-lg font-bold text-yellow-400">
                       {item.tags.map((tag, index) => (
                         <span key={index}>{tag}</span>
                       ))}
