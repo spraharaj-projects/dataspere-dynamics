@@ -6,8 +6,10 @@ import InstantSearchBox from "./InstantSearchBox";
 import RefinementTags from "./RefinementTags";
 
 const Search = ({
+  contentType,
   children,
 }: Readonly<{
+  contentType: string;
   children: React.ReactNode;
 }>) => {
   const searchClient = algoliasearch(
@@ -16,7 +18,7 @@ const Search = ({
   );
 
   return (
-    <InstantSearch searchClient={searchClient} indexName="blog">
+    <InstantSearch searchClient={searchClient} indexName={contentType === 'Blog'? 'blog': 'projects'}>
       <InstantSearchBox />
       <RefinementTags attribute="tags" />
 

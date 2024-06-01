@@ -39,7 +39,7 @@ const ContentIndex = async ({
             <PrismicRichText field={slice.primary.description} />
           </div>
         )}
-        <Search>
+        <Search contentType={contentType}>
           <ContentList
             allItems={items}
             contentType={contentType}
