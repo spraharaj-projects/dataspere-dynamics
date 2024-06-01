@@ -4,7 +4,10 @@ import type * as prismic from "@prismicio/client";
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
-type BlogPostDocumentDataSlicesSlice = ImageBlockSlice | TextBlockSlice;
+type BlogPostDocumentDataSlicesSlice =
+  | CodeBlockGroupSlice
+  | ImageBlockSlice
+  | TextBlockSlice;
 
 /**
  * Content for Blog Post documents
@@ -588,6 +591,76 @@ export type BiographySlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *CodeBlockGroup → Primary*
+ */
+export interface CodeBlockGroupSliceDefaultPrimary {
+  /**
+   * Description field in *CodeBlockGroup → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: code_block_group.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *CodeBlockGroup → Items*
+ */
+export interface CodeBlockGroupSliceDefaultItem {
+  /**
+   * Coding Language field in *CodeBlockGroup → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: code_block_group.items[].coding_language
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  coding_language: prismic.KeyTextField;
+
+  /**
+   * Code field in *CodeBlockGroup → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: code_block_group.items[].code
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  code: prismic.RichTextField;
+}
+
+/**
+ * Default variation for CodeBlockGroup Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CodeBlockGroupSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<CodeBlockGroupSliceDefaultPrimary>,
+  Simplify<CodeBlockGroupSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *CodeBlockGroup*
+ */
+type CodeBlockGroupSliceVariation = CodeBlockGroupSliceDefault;
+
+/**
+ * CodeBlockGroup Shared Slice
+ *
+ * - **API ID**: `code_block_group`
+ * - **Description**: CodeBlockGroup
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CodeBlockGroupSlice = prismic.SharedSlice<
+  "code_block_group",
+  CodeBlockGroupSliceVariation
+>;
+
+/**
  * Primary content in *ContentIndex → Primary*
  */
 export interface ContentIndexSliceDefaultPrimary {
@@ -1024,6 +1097,11 @@ declare module "@prismicio/client" {
       BiographySliceDefaultPrimary,
       BiographySliceVariation,
       BiographySliceDefault,
+      CodeBlockGroupSlice,
+      CodeBlockGroupSliceDefaultPrimary,
+      CodeBlockGroupSliceDefaultItem,
+      CodeBlockGroupSliceVariation,
+      CodeBlockGroupSliceDefault,
       ContentIndexSlice,
       ContentIndexSliceDefaultPrimary,
       ContentIndexSliceVariation,

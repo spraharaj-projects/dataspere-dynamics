@@ -1,0 +1,43 @@
+{
+  "id": "code_block_group",
+  "type": "SharedSlice",
+  "name": "CodeBlockGroup",
+  "description": "CodeBlockGroup",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "description": {
+          "type": "Text",
+          "config": {
+            "label": "Description",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {
+        "coding_language": {
+          "type": "Text",
+          "config": {
+            "label": "Coding Language",
+            "placeholder": ""
+          }
+        },
+        "code": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Code",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        }
+      }
+    }
+  ]
+}

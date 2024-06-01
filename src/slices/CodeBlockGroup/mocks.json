@@ -1,0 +1,42 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"description": {
+				"__TYPE__": "FieldContent",
+				"value": "enjoy",
+				"type": "Text"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": [
+					[
+						"coding_language",
+						{
+							"__TYPE__": "FieldContent",
+							"value": "wash",
+							"type": "Text"
+						}
+					],
+					[
+						"code",
+						{
+							"__TYPE__": "StructuredTextContent",
+							"value": [
+								{
+									"type": "paragraph",
+									"content": {
+										"text": "Consequat consequat nisi reprehenderit do esse proident cupidatat ullamco est est ipsum culpa consectetur nostrud amet. Consequat eiusmod deserunt commodo pariatur fugiat eu."
+									}
+								}
+							]
+						}
+					]
+				]
+			}
+		]
+	}
+]
