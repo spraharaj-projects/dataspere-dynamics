@@ -2,8 +2,8 @@
 
 import clsx from "clsx";
 import React, { useState } from "react";
-import { Content, KeyTextField, asLink } from "@prismicio/client";
-import { PrismicNextLink } from "@prismicio/next";
+import { Content, KeyTextField, ImageField, asLink } from "@prismicio/client";
+import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import Link from "next/link";
 import { MdMenu, MdClose } from "react-icons/md";
 import Button from "./Button";
@@ -20,7 +20,8 @@ export default function NavBar({
   return (
     <nav aria-label="Main navigation">
       <ul className="flex flex-col justify-between rounded-b-lg bg-slate-50 px-4 py-2 md:m-4 md:flex-row md:items-center md:rounded-xl">
-        <div className="flex items-center justify-between">
+        <div className="flex gap-4 items-center justify-between">
+          <BrandImageLogo image={settings.data.brand_image} />
           <NameLogo name={settings.data.name} />
           <button
             aria-expanded={open}
@@ -34,7 +35,7 @@ export default function NavBar({
         <div
           className={clsx(
             "fixed bottom-0 left-0 right-0 top-0 z-50 flex flex-col items-end gap-4 bg-slate-50 pr-4 pt-14 transition-transform duration-300 ease-in-out md:hidden",
-            open ? "translate-x-0" : "translate-x-[100%]"
+            open ? "translate-x-0" : "translate-x-[100%]",
           )}
         >
           <button
@@ -50,7 +51,7 @@ export default function NavBar({
               <li className="first:mt-8">
                 <PrismicNextLink
                   className={clsx(
-                    "group relative block overflow-hidden rounded px-3 text-3xl font-bold text-slate-900 "
+                    "group relative block overflow-hidden rounded px-3 text-3xl font-bold text-slate-900 ",
                   )}
                   field={link}
                   onClick={() => setOpen(false)}
@@ -65,7 +66,7 @@ export default function NavBar({
                       "absolute inset-0 z-0 h-full translate-y-12 rounded bg-yellow-300 transition-transform duration-300 ease-in-out group-hover:translate-y-0",
                       pathname.includes(asLink(link) as string)
                         ? "translate-y-6"
-                        : "translate-y-18"
+                        : "translate-y-18",
                     )}
                   />
                   <span className="relative">{label}</span>
@@ -107,6 +108,18 @@ function NameLogo({ name }: { name: KeyTextField }) {
   );
 }
 
+function BrandImageLogo({ image }: { image: ImageField }) {
+  return (
+    <Link
+      href="/"
+      aria-label="Home page"
+      className="tracking-tighter"
+    >
+      <PrismicNextImage field={image} className="w-10"/>
+    </Link>
+  );
+}
+
 function DesktopMenu({
   settings,
   pathname,
@@ -121,7 +134,7 @@ function DesktopMenu({
           <li>
             <PrismicNextLink
               className={clsx(
-                "group relative block overflow-hidden rounded px-3 py-1 text-base font-bold text-slate-900"
+                "group relative block overflow-hidden rounded px-3 py-1 text-base font-bold text-slate-900",
               )}
               field={link}
               aria-current={
@@ -133,7 +146,7 @@ function DesktopMenu({
                   "absolute inset-0 z-0 h-full rounded bg-yellow-300 transition-transform  duration-300 ease-in-out group-hover:translate-y-0",
                   pathname.includes(asLink(link) as string)
                     ? "translate-y-6"
-                    : "translate-y-8"
+                    : "translate-y-8",
                 )}
               />
               <span className="relative">{label}</span>

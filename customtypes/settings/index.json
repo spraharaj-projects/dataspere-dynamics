@@ -13,6 +13,14 @@
           "placeholder": ""
         }
       },
+      "brand_image": {
+        "type": "Image",
+        "config": {
+          "label": "Brand Image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
       "nav_item": {
         "type": "Group",
         "config": {

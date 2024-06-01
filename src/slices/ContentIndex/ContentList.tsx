@@ -6,26 +6,33 @@ import React, { useEffect, useRef, useState } from "react";
 import { MdArrowOutward } from "react-icons/md";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useHits, UseHitsProps } from "react-instantsearch";
 
 gsap.registerPlugin(ScrollTrigger);
 
 type ContentListProps = {
-  items: Content.BlogPostDocument[] | Content.ProjectDocument[];
+  allItems: Content.BlogPostDocument[] | Content.ProjectDocument[];
   contentType: Content.ContentIndexSlice["primary"]["content_type"];
   fallbackItemImage: Content.ContentIndexSlice["primary"]["fallback_item_image"];
   viewMoreText: Content.ContentIndexSlice["primary"]["view_more_text"];
 };
 
 export default function ContentList({
-  items,
+  allItems,
   contentType,
   fallbackItemImage,
   viewMoreText = "Read More",
 }: ContentListProps) {
+  // const items = items.filter(() => )
   const component = useRef(null);
   const revealRef = useRef(null);
   const itemsRef = useRef<Array<HTMLElement | null>>([]);
   const [currentItem, setCurrentItem] = useState<null | number>(null);
+  const [items, setItems] =
+    useState<Array<Content.BlogPostDocument | Content.ProjectDocument>>(
+      allItems,
+    );
+  const { hits } = useHits();
 
   const urlPrefixes = contentType === "Blog" ? "/blog" : "/projects";
 
@@ -33,6 +40,16 @@ export default function ContentList({
     x: 0,
     y: 0,
   });
+
+  useEffect(() => {
+    const filteredIds = hits.map((item) => item.objectID);
+    setItems(
+      allItems.filter((item) => {
+        console.log(filteredIds, item.id);
+        return filteredIds.includes(item.id);
+      }),
+    );
+  }, [hits, allItems]);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -51,12 +68,12 @@ export default function ContentList({
               end: "bottom center",
               toggleActions: "play none none none",
             },
-          }
+          },
         );
       });
       return () => ctx.revert();
     }, component);
-  }, []);
+  }, [items]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -124,7 +141,7 @@ export default function ContentList({
   };
 
   return (
-    <div ref={component}>
+    <div ref={component} className="mt-10">
       <ul
         className="grid border-b border-b-slate-100"
         onMouseLeave={onMouseLeave}
@@ -151,7 +168,7 @@ export default function ContentList({
                     <span className="text-3xl font-bold">
                       {item.data.title}
                     </span>
-                    <div className="flex gap-3 text-yellow-400 text-lg font-bold">
+                    <div className="flex gap-3 text-lg font-bold text-yellow-400">
                       {item.tags.map((tag, index) => (
                         <span key={index}>{tag}</span>
                       ))}

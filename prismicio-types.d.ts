@@ -371,6 +371,17 @@ interface SettingsDocumentData {
   name: prismic.KeyTextField;
 
   /**
+   * Brand Image field in *Settings*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.brand_image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  brand_image: prismic.ImageField<never>;
+
+  /**
    * Nav Item field in *Settings*
    *
    * - **Field Type**: Group
@@ -826,6 +837,16 @@ export interface ImageBlockSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   image: prismic.ImageField<never>;
+
+  /**
+   * Caption field in *ImageBlock → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_block.primary.caption
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  caption: prismic.RichTextField;
 }
 
 /**
