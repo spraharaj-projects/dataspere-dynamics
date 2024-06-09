@@ -25,14 +25,14 @@ const RefinementTags = (props: UseRefinementListProps) => {
   };
 
   useEffect(() => {
-    searchForItems(searchQuery)
-  }, [searchQuery, searchForItems])
+    searchForItems(searchQuery);
+  }, [searchQuery, searchForItems]);
 
   return (
     <div className="mt-5 inline-flex gap-5">
       <Menu>
         <MenuButton className="inline-flex items-center gap-2 rounded-2xl bg-gray-800 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-700 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white">
-          Options
+          Filter Tags
         </MenuButton>
         <Transition
           enter="transition ease-out duration-75"
@@ -91,7 +91,11 @@ const RefinementTags = (props: UseRefinementListProps) => {
       </Menu>
       <div className="inline-flex gap-2 px-3 py-1.5">
         {selectedTags.map((tag, index) => (
-          <span key={index} className="rounded-xl bg-yellow-500 px-3">
+          <span
+            key={index}
+            className="rounded-xl bg-yellow-500 px-3 text-gray-300 dark:text-gray-900"
+            onClick={() => handleTagSelection(tag)}
+          >
             {tag}
           </span>
         ))}

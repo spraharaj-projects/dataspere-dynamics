@@ -1,8 +1,9 @@
 "use client";
 
-import { Content } from "@prismicio/client";
+import { asText, Content } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { useState } from "react";
+import CodeHighligher from "../../components/CodeHighligher";
 
 /**
  * Props for `CodeBlockGroup`.
@@ -46,7 +47,7 @@ const CodeBlockGroup = ({ slice }: CodeBlockGroupProps): JSX.Element => {
             className={`${openTab === index ? "block" : "hidden"}`}
             role="tabpanel"
           >
-            <PrismicRichText field={item.code} />
+            <CodeHighligher codeBlock={asText(item.code)} />
           </div>
         ))}
       </div>

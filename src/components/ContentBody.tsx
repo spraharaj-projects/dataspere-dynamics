@@ -5,8 +5,6 @@ import Bounded from "@/components/Bounded";
 import Heading from "@/components/Heading";
 import { Content, DateField, isFilled } from "@prismicio/client";
 
-type Params = { uid: string };
-
 export default function ContentBody({
   page,
 }: {
