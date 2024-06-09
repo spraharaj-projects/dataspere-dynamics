@@ -13,7 +13,7 @@ export type ImageBlockProps = SliceComponentProps<Content.ImageBlockSlice>;
  */
 const ImageBlock = ({ slice }: ImageBlockProps): JSX.Element => {
   return (
-    <figure>
+    <figure className="w-4/5">
       {isFilled.image(slice.primary.image) && (
         <div className="bg-gray-100">
           <PrismicNextImage

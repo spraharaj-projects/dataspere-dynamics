@@ -165,15 +165,23 @@ export default function ContentList({
                 >
                   <div className="flex flex-col">
                     <span className="text-3xl font-bold">
-                      {item.data.title}
+                      <span className="truncate hover:overflow-visible hover:whitespace-normal">
+                        {item.data.title.length > 80
+                          ? `${item.data.title.slice(0, item.data.title.lastIndexOf(" ", 80))}...`
+                          : item.data.title}
+                      </span>
                     </span>
                     <div className="flex gap-3 text-lg font-bold text-yellow-400">
-                      {item.tags.map((tag, index) => (
-                        <span key={index}>{tag}</span>
-                      ))}
+                      {item.tags
+                        .sort()
+                        .slice(0, 3)
+                        .map((tag, index) => (
+                          <span key={index}>{tag}</span>
+                        ))}
+                      {item.tags.length > 3 ? <span>...</span> : ""}
                     </div>
                   </div>
-                  <span className="ml-auto flex items-center gap-2 text-xl font-medium md:ml-0">
+                  <span className="ml-auto flex items-center gap-10 text-xl font-medium md:ml-0">
                     {viewMoreText} <MdArrowOutward />
                   </span>
                 </Link>

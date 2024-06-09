@@ -17,7 +17,7 @@ export type CodeBlockGroupProps =
 const CodeBlockGroup = ({ slice }: CodeBlockGroupProps): JSX.Element => {
   const [openTab, setOpenTab] = useState(0);
   return (
-    <div className="w-full">
+    <div className="w-4/5">
       <div className="mb-4 border-b border-gray-200 dark:border-gray-700">
         <ul className="-mb-px flex list-none flex-wrap" role="tablist">
           {slice.items.map((item, index) => (
