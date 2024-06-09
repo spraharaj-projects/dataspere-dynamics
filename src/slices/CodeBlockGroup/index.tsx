@@ -16,7 +16,6 @@ export type CodeBlockGroupProps =
  */
 const CodeBlockGroup = ({ slice }: CodeBlockGroupProps): JSX.Element => {
   const [openTab, setOpenTab] = useState(0);
-  console.log(slice.items[0].code);
   return (
     <div className="w-full">
       <div className="mb-4 border-b border-gray-200 dark:border-gray-700">

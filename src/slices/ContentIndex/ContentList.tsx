@@ -45,7 +45,6 @@ export default function ContentList({
     const filteredIds = hits.map((item) => item.objectID);
     setItems(
       allItems.filter((item) => {
-        console.log(filteredIds, item.id);
         return filteredIds.includes(item.id);
       }),
     );
