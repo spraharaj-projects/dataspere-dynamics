@@ -34,6 +34,14 @@
           "thumbnails": []
         }
       },
+      "repository_link": {
+        "type": "Link",
+        "config": {
+          "label": "Repository Link",
+          "placeholder": "",
+          "select": null
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",

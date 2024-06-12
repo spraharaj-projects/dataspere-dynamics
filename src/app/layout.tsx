@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import clsx from "clsx";
 import { PrismicPreview } from "@prismicio/next";
 import { createClient, repositoryName } from "@/prismicio";
+import Head from "next/head";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -26,6 +27,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="bg-slate-900 text-slate-100">
+      <Head>
+        <meta
+          name="google-site-verification"
+          content="qwPN-96uOlMKTyY0rtcLBvno5GRzuzOjgZvCy7roK8g"
+        />
+      </Head>
       <body className={clsx(urbanist.className, "relative min-h-screen")}>
         <Header />
         {children}
