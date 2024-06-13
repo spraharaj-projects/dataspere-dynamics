@@ -40,15 +40,17 @@ export default function ContentBody({
         </div>
         <p className="mt-8 flex justify-between border-b border-slate-600 text-xl font-medium text-slate-300">
           {formatedDate}
-          <PrismicNextLink field={page.data.repository_link}>
-            <button
-              type="button"
-              className="mb-2 me-2 inline-flex items-center rounded-lg bg-[#24292F] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#24292F]/90 focus:outline-none focus:ring-4 focus:ring-[#24292F]/50 dark:hover:bg-[#050708]/30 dark:focus:ring-gray-500"
-            >
-              <FaGithub className="me-2" size={20}/>
-              Github Repository
-            </button>
-          </PrismicNextLink>
+          {isFilled.link(page.data.repository_link) && (
+            <PrismicNextLink field={page.data.repository_link}>
+              <button
+                type="button"
+                className="mb-2 me-2 inline-flex items-center rounded-lg bg-[#24292F] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#24292F]/90 focus:outline-none focus:ring-4 focus:ring-[#24292F]/50 dark:hover:bg-[#050708]/30 dark:focus:ring-gray-500"
+              >
+                <FaGithub className="me-2" size={20} />
+                Github Repository
+              </button>
+            </PrismicNextLink>
+          )}
         </p>
         <div className="prose prose-lg prose-invert mt-6 w-full max-w-none md:mt-10">
           <SliceZone slices={page.data.slices} components={components} />
